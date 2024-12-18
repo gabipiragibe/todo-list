@@ -1,7 +1,7 @@
 import { GlobalStyle } from "./styles/global";
 import { ThemeProvider } from "styled-components";
-import { Home } from "./pages/Home";
 import { defaultTheme } from "./styles/themes/default";
+import { Home } from "./pages/Home";
 
 export const App = () => {
   return (
