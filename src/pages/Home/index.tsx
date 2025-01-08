@@ -1,11 +1,10 @@
-import { EmptyTasks } from "../../components/EmptyTasks";
-import { Header } from "../../components/Header";
+// import { AddedTasks } from "../../components/AddedTasks";
+import { Input } from "../../components/Input";
 
 export const Home = () => {
   return (
     <>
-      <Header />
-      <EmptyTasks />
+      <Input />
     </>
   );
 };
