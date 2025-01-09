@@ -6,16 +6,31 @@ import { AddedTasks } from "../AddedTasks";
 export const Input = () => {
   const [inputValue, setInputValue] = useState("");
   const [addTasks, setAddTasks] = useState<string[]>([]);
+  const [completedTasks, setCompletedTasks] = useState<string[]>([]);
+
   const handleAddTasks = (event: React.FormEvent) => {
     event.preventDefault();
 
     if (inputValue.trim() !== "") {
-      setAddTasks((prevTasks) => {
-        const newTasks = [...prevTasks, inputValue];
-        return newTasks;
-      });
+      setAddTasks((prevTasks) => [...prevTasks, inputValue]);
     }
     setInputValue("");
+  };
+
+  const handleCompleteTask = (taskToComplete: string) => {
+    setCompletedTasks((prev) => [...prev, taskToComplete]);
+  };
+
+  const handleRemoveTask = (taskToRemove: string) => {
+    setAddTasks((prevTasks) =>
+      prevTasks.filter((task) => task !== taskToRemove)
+    );
+
+    if (completedTasks.includes(taskToRemove)) {
+      setCompletedTasks((prevCompleted) =>
+        prevCompleted.filter((task) => task !== taskToRemove)
+      );
+    }
   };
 
   return (
@@ -45,7 +60,12 @@ export const Input = () => {
           </S.InputContainer>
         </form>
       </S.Container>
-      <AddedTasks tasks={addTasks || []} />
+      <AddedTasks
+        tasks={addTasks}
+        completedTasks={completedTasks}
+        onCompleteTask={handleCompleteTask}
+        onRemoveTask={handleRemoveTask}
+      />
     </>
   );
 };
